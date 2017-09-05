@@ -1,5 +1,13 @@
 import express from 'express';
-import graphqlHTTP from 'express-graphql';
+import {
+  graphqlExpress,
+  graphiqlExpress,
+} from 'apollo-server-express';
+import { execute, subscribe } from 'graphql';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import { createServer } from 'http';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
 import jwt from 'express-jwt';
 import expressLogging from 'express-logging';
 import logger from 'logops';
@@ -10,15 +18,17 @@ dotenv.config({ silent: true });
 import schema from './src/models/schema';
 import { JWT_SECRET, SERVER_PORT, DB_URL } from './src/config';
 
-const User = mongoose.model('User');
-const app = express();
+const server = express();
 
-app.use('/graphql', jwt({
+server.use('*', cors({ origin: `http://localhost:${SERVER_PORT}` }));
+
+server.use('/graphql', jwt({
   secret: JWT_SECRET,
   requestProperty: 'auth',
   credentialsRequired: false,
 }));
-app.use('/graphql', function (req, res, done) {
+
+server.use('/graphql', function (req, res, done) {
   if (req.auth) {
     User.findById(req.auth.id).then(
       (user) => {
@@ -33,7 +43,8 @@ app.use('/graphql', function (req, res, done) {
     done();
   }
 });
-app.use('/graphql', graphqlHTTP({
+
+server.use('/graphql', bodyParser.json(), graphqlExpress({
   schema: schema,
   graphiql: true,
   pretty: true,
@@ -45,9 +56,25 @@ app.use('/graphql', graphqlHTTP({
   }),
 }));
 
-app.use(expressLogging(logger));
+server.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql',
+  subscriptionsEndpoint: `ws://localhost:${SERVER_PORT}/subscriptions`
+}));
 
-app.listen(SERVER_PORT, function () {
-  console.log(`Server listening at ${SERVER_PORT}`);
+server.use(expressLogging(logger));
+
+// Wrap the Express server
+const ws = createServer(server);
+ws.listen(SERVER_PORT, () => {
+  console.log(`Apollo Server is now running on http://localhost:${SERVER_PORT}`);
+  // Set up the WebSocket for handling GraphQL subscriptions
+  new SubscriptionServer({
+    execute,
+    subscribe,
+    schema
+  }, {
+    server: ws,
+    path: '/subscriptions',
+  });
   mongoose.connect(DB_URL);
 });
