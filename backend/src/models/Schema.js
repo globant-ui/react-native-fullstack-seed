@@ -10,6 +10,10 @@ import {
   } from './user/UserQL';
 
 import {
+  PostQueries
+  } from './post/PostQL';
+
+import {
   TestQueries,
   } from './test/TestQL';
 
@@ -21,7 +25,11 @@ const RootQuery = new GraphQLObjectType({
     users: UserQueries.users,
 
     // Test
-    packages: TestQueries.packages
+    packages: TestQueries.packages,
+
+    // Post
+    getAllPosts: PostQueries.getAllPosts,
+    getPost: PostQueries.getPost
   })
 });
 
