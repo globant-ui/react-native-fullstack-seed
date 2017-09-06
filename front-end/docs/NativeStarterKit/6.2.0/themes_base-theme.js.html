@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>React Native Seed Source: themes/base-theme.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.sandstone.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">React Native Seed</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-Drawer.html">Drawer</a></li><li><a href="module-StackRouter.html">StackRouter</a></li><li><a href="module-configureStore.html">configureStore</a></li><li><a href="module-Promise.html">Promise</a></li><li><a href="module-Setup.html">Setup</a></li><li><a href="module-Theme.html">Theme</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="App.html">App</a></li><li><a href="DrawBar.html">DrawBar</a></li><li><a href="Login.html">Login</a></li><li><a href="module-Setup-Root.html">Setup~Root</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#LoginSwag">LoginSwag</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: themes/base-theme.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">// framework
+import color from 'color';
+import { Platform } from 'react-native';
+
+/**
+ * @module Theme
+ */
+
+export default {
+
+    // Badge
+  badgeBg: '#ED1727',
+  badgeColor: '#fff',
+
+
+  // Button
+  btnFontFamily: (Platform.OS === 'ios') ? 'HelveticaNeue' : 'Roboto_medium',
+  btnDisabledBg: '#b5b5b5',
+  btnDisabledClr: '#f1f1f1',
+
+  get btnPrimaryBg() {
+    return this.brandPrimary;
+  },
+  get btnPrimaryColor() {
+    return this.inverseTextColor;
+  },
+  get btnInfoBg() {
+    return this.brandInfo;
+  },
+  get btnInfoColor() {
+    return this.inverseTextColor;
+  },
+  get btnSuccessBg() {
+    return this.brandSuccess;
+  },
+  get btnSuccessColor() {
+    return this.inverseTextColor;
+  },
+  get btnDangerBg() {
+    return this.brandDanger;
+  },
+  get btnDangerColor() {
+    return this.inverseTextColor;
+  },
+  get btnWarningBg() {
+    return this.brandWarning;
+  },
+  get btnWarningColor() {
+    return this.inverseTextColor;
+  },
+  get btnTextSize() {
+    return (Platform.OS === 'ios') ? this.fontSizeBase * 1.1 :
+    this.fontSizeBase - 1;
+  },
+  get btnTextSizeLarge() {
+    return this.fontSizeBase * 1.5;
+  },
+  get btnTextSizeSmall() {
+    return this.fontSizeBase * 0.8;
+  },
+  get borderRadiusLarge() {
+    return this.fontSizeBase * 3.8;
+  },
+
+  buttonPadding: 6,
+
+  get iconSizeLarge() {
+    return this.iconFontSize * 1.5;
+  },
+  get iconSizeSmall() {
+    return this.iconFontSize * 0.6;
+  },
+
+
+  // Card
+  cardDefaultBg: '#fff',
+
+
+  // Check Box
+  checkboxBgColor: '#039BE5',
+  checkboxSize: 23,
+  checkboxTickColor: '#fff',
+
+
+  // Color
+  brandPrimary: '#5067FF',
+  brandInfo: '#5bc0de',
+  brandSuccess: '#5cb85c',
+  brandDanger: '#d9534f',
+  brandWarning: '#f0ad4e',
+  brandSidebar: '#252932',
+
+
+  // Font
+  fontFamily: (Platform.OS === 'ios') ? 'HelveticaNeue' : 'Roboto',
+  fontSizeBase: 15,
+
+  get fontSizeH1() {
+    return this.fontSizeBase * 1.8;
+  },
+  get fontSizeH2() {
+    return this.fontSizeBase * 1.6;
+  },
+  get fontSizeH3() {
+    return this.fontSizeBase * 1.4;
+  },
+
+
+  // Footer
+  footerHeight: 55,
+  footerDefaultBg: (Platform.OS === 'ios') ? '#F8F8F8' : '#4179F7',
+
+
+  // FooterTab
+  tabBarTextColor: (Platform.OS === 'ios') ? '#6b6b6b' : '#b3c7f9',
+  tabBarActiveTextColor: (Platform.OS === 'ios') ? '#007aff' : '#fff',
+  tabActiveBgColor: (Platform.OS === 'ios') ? '#e4f0fe' : undefined,
+
+
+  // Header
+  iosToolbarBtnColor: '#007aff',
+  toolbarDefaultBg: (Platform.OS === 'ios') ? '#F8F8F8' : '#4179F7',
+  toolbarHeight: (Platform.OS === 'ios') ? 64 : 56,
+  toolbarIconSize: (Platform.OS === 'ios') ? 20 : 22,
+  toolbarInputColor: '#CECDD2',
+  toolbarInverseBg: '#222',
+  toolbarTextColor: (Platform.OS === 'ios') ? '#000' : '#fff',
+  get statusBarColor() {
+    return color(this.toolbarDefaultBg).darken(0.2).hex();
+  },
+
+
+  // Icon
+  iconFamily: 'Ionicons',
+  iconFontSize: (Platform.OS === 'ios') ? 30 : 28,
+  iconMargin: 7,
+
+
+  // InputGroup
+  inputFontSize: 15,
+  inputBorderColor: '#D9D5DC',
+  inputSuccessBorderColor: '#2b8339',
+  inputErrorBorderColor: '#ed2f2f',
+
+  get inputColor() {
+    return this.textColor;
+  },
+  get inputColorPlaceholder() {
+    return '#575757';
+  },
+
+  inputGroupMarginBottom: 10,
+  inputHeightBase: 40,
+  inputPaddingLeft: 5,
+
+  get inputPaddingLeftIcon() {
+    return this.inputPaddingLeft * 8;
+  },
+
+
+  // Line Height
+  btnLineHeight: 19,
+  lineHeightH1: 32,
+  lineHeightH2: 27,
+  lineHeightH3: 22,
+  iconLineHeight: (Platform.OS === 'ios') ? 37 : 30,
+  lineHeight: (Platform.OS === 'ios') ? 20 : 26,
+
+
+  // List
+  listBorderColor: '#ACAAAB',
+  // listBorderColor: '#ddd',
+  listDividerBg: '#ddd',
+  listItemHeight: 45,
+  listItemPadding: 9,
+  listNoteColor: '#808080',
+  listNoteSize: 13,
+
+
+  // Progress Bar
+  defaultProgressColor: '#E4202D',
+  inverseProgressColor: '#1A191B',
+
+
+  // Radio Button
+  radioBtnSize: (Platform.OS === 'ios') ? 25 : 23,
+  radioColor: '#7e7e7e',
+
+  get radioSelectedColor() {
+    return color(this.radioColor).darken(0.2).hex();
+  },
+
+
+  // Spinner
+  defaultSpinnerColor: '#45D56E',
+  inverseSpinnerColor: '#1A191B',
+
+
+  // Tabs
+  tabBgColor: '#F8F8F8',
+  tabFontSize: 15,
+  tabTextColor: '#fff',
+
+
+  // Text
+  textColor: '#000',
+  inverseTextColor: '#fff',
+
+
+  // Title
+  titleFontSize: (Platform.OS === 'ios') ? 17 : 19,
+  subTitleFontSize: (Platform.OS === 'ios') ? 12 : 14,
+  subtitleColor: '#8e8e93',
+
+
+  // Other
+  borderRadiusBase: (Platform.OS === 'ios') ? 5 : 2,
+  borderWidth: 1,
+  contentPadding: 10,
+
+  get darkenHeader() {
+    return color(this.tabBgColor).darken(0.03).hex();
+  },
+
+  dropdownBg: '#000',
+  dropdownLinkColor: '#414142',
+  inputLineHeight: 24,
+  jumbotronBg: '#C9C9CE',
+  jumbotronPadding: 30,
+};
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+	Globant
+
+
+	<span class="copyright">
+	Globant
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a>
+	
+		on Thursday, August 10th 2017
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+<script>
+	$( function () {
+		$( '#main' ).localScroll( {
+			offset : { top : 60 } //offset by the height of your header (give or take a few px, see what works for you)
+		} );
+		$( "dt.name" ).each( function () {
+			var $this = $( this ).find("h4");
+			var icon = $( "<i/>" ).addClass( "icon-plus-sign" ).addClass( "pull-right" ).addClass( "icon-white" );
+			var dt = $(this);
+			var children = dt.next( "dd" );
+
+			dt.prepend( icon ).css( {cursor : "pointer"} );
+			dt.addClass( "member-collapsed" ).addClass( "member" );
+
+
+			children.hide();
+
+			dt.children().on( "click", function () {
+				children = dt.next( "dd" );
+				children.slideToggle( "fast", function () {
+
+					if ( children.is( ":visible" ) ) {
+						icon.addClass( "icon-minus-sign" ).removeClass( "icon-plus-sign" ).removeClass( "icon-white" );
+						dt.addClass( "member-open" ).animate( "member-collapsed" );
+					} else {
+						icon.addClass( "icon-plus-sign" ).removeClass( "icon-minus-sign" ).addClass( "icon-white" );
+						dt.addClass( "member-collapsed" ).removeClass( "member-open" );
+					}
+				} );
+			} );
+
+		} );
+	} );
+</script>
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

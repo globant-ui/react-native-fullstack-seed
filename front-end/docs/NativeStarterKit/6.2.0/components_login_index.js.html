@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>React Native Seed Source: components/login/index.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.sandstone.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">React Native Seed</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-Drawer.html">Drawer</a></li><li><a href="module-StackRouter.html">StackRouter</a></li><li><a href="module-configureStore.html">configureStore</a></li><li><a href="module-Promise.html">Promise</a></li><li><a href="module-Setup.html">Setup</a></li><li><a href="module-Theme.html">Theme</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="App.html">App</a></li><li><a href="DrawBar.html">DrawBar</a></li><li><a href="Login.html">Login</a></li><li><a href="module-Setup-Root.html">Setup~Root</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#LoginSwag">LoginSwag</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: components/login/index.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">// Framework 
+import React, { Component } from 'react';
+import Types from 'prop-types';
+import { Image } from 'react-native';
+import {
+  Container,
+  Content,
+  Item,
+  Input,
+  Button,
+  Icon,
+  View,
+  Text
+} from 'native-base';
+import { Field, reduxForm } from 'redux-form';
+
+// Actions
+import { setUser } from '../../actions/user';
+
+// Styles
+import styles from './styles';
+
+// Background image
+const background = require('../../../images/logo.png');
+
+
+/**
+ * Form validations
+ * @const
+ * @param {object} values 
+ * @memberof Login
+ */
+const validate = values => {
+  const error = {};
+  error.email = '';
+  error.password = '';
+  var ema = values.email;
+  var pw = values.password;
+  if (values.email === undefined) {
+    ema = '';
+  }
+  if (values.password === undefined) {
+    pw = '';
+  }
+  if (ema.length &lt; 8 &amp;&amp; ema !== '') {
+    error.email = 'too short';
+  }
+  if (!ema.includes('@') &amp;&amp; ema !== '') {
+    error.email = '@ not included';
+  }
+  if (pw.length > 12) {
+    error.password = 'max 11 characters';
+  }
+  if (pw.length &lt; 5 &amp;&amp; pw.length > 0) {
+    error.password = 'Weak';
+  }
+  return error;
+};
+
+/**
+ * &lt;p>This is rendered when the user has not entered his credentilas
+ * or when he logs out.&lt;/p>
+ */
+class Login extends Component {
+  /**
+   * All properties passed to this components must be added here
+   */
+  static propTypes = {
+    setUser: Types.func,
+    navigation: Types.object
+  };
+
+  /**
+   * @constructor
+   * @param {object} props 
+   */
+  constructor(props) {
+    super(props);
+    // Local state 
+    this.state = {
+      name: ''
+    };
+
+    // All bindings must be added in the contructor
+    this.renderInput = this.renderInput.bind(this);
+  }
+
+  /**
+   * Call the binded action setUser, and dispatches the setUser action.
+   * @param {string} name - Username 
+   */
+  setUser(name) {
+    this.props.setUser(name);
+  }
+
+  /**
+   * Rensders an input componenent for the Field.
+   * Check the documentation &lt;a href="http://redux-form.com/7.0.3/docs/api/Field.md/">Redux form Field&lt;/a>
+   * @param {object} param - Input options
+   * @return {component} item
+   */
+  renderInput({
+    input,
+    meta: { error }
+  }) {
+    var hasError = false;
+    if (error !== undefined) {
+      hasError = true;
+    }
+    return (
+      &lt;Item error={hasError}>
+        &lt;Icon active name={input.name === 'email' ? 'person' : 'lock'} />
+        &lt;Input
+          placeholder={input.name === 'email' ? 'Email' : 'Password'}
+          secureTextEntry={input.name === 'password'}
+          {...input}
+        />
+        {hasError
+          ? &lt;Item style={styles.item}>
+              &lt;Text style={styles.text}>{error}&lt;/Text>
+            &lt;/Item>
+          : &lt;Text />}
+      &lt;/Item>
+    );
+  }
+
+  /**
+   * Renders the component using NativeBase components
+   */
+  render() {
+    return (
+      &lt;Container>
+        &lt;View style={styles.container}>
+          &lt;Content>
+            &lt;Image source={background} style={styles.shadow}>
+              &lt;View style={styles.bg}>
+                &lt;Field name='email' component={this.renderInput} />
+                &lt;Field name='password' component={this.renderInput} />
+                &lt;Button
+                  style={styles.btn}
+                  onPress={() => this.props.navigation.navigate('Home')}
+                >
+                  &lt;Text>Login&lt;/Text>
+                &lt;/Button>
+              &lt;/View>
+            &lt;/Image>
+          &lt;/Content>
+        &lt;/View>
+      &lt;/Container>
+    );
+  }
+}
+
+/**
+ * Redux form function binds the form instance and validations.
+ * Check &lt;a href="http://redux-form.com/7.0.3/docs/api/ReduxForm.md/">reduxForm()&lt;/a>
+ * @const
+ * @param {object} param1 - Form instance and validation
+ * @param {func} param2 - Binding of actions
+ */
+const LoginSwag = reduxForm(
+  {
+    form: 'test',
+    validate
+  },
+  function bindActions(dispatch) {
+    return {
+      setUser: name => dispatch(setUser(name))
+    };
+  }
+)(Login);
+
+/**
+ * Navigation options depends of the navigation provider.
+ * Here header is null to remove the header.
+ */
+LoginSwag.navigationOptions = {
+  header: null
+};
+export default LoginSwag;
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+	Globant
+
+
+	<span class="copyright">
+	Globant
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a>
+	
+		on Thursday, August 10th 2017
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+<script>
+	$( function () {
+		$( '#main' ).localScroll( {
+			offset : { top : 60 } //offset by the height of your header (give or take a few px, see what works for you)
+		} );
+		$( "dt.name" ).each( function () {
+			var $this = $( this ).find("h4");
+			var icon = $( "<i/>" ).addClass( "icon-plus-sign" ).addClass( "pull-right" ).addClass( "icon-white" );
+			var dt = $(this);
+			var children = dt.next( "dd" );
+
+			dt.prepend( icon ).css( {cursor : "pointer"} );
+			dt.addClass( "member-collapsed" ).addClass( "member" );
+
+
+			children.hide();
+
+			dt.children().on( "click", function () {
+				children = dt.next( "dd" );
+				children.slideToggle( "fast", function () {
+
+					if ( children.is( ":visible" ) ) {
+						icon.addClass( "icon-minus-sign" ).removeClass( "icon-plus-sign" ).removeClass( "icon-white" );
+						dt.addClass( "member-open" ).animate( "member-collapsed" );
+					} else {
+						icon.addClass( "icon-plus-sign" ).removeClass( "icon-minus-sign" ).addClass( "icon-white" );
+						dt.addClass( "member-collapsed" ).removeClass( "member-open" );
+					}
+				} );
+			} );
+
+		} );
+	} );
+</script>
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

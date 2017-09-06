@@ -1,0 +1,30 @@
+{
+  "plugins": [],
+  "recurseDepth": 10,
+  "source": {
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
+  "templates": {
+    "systemName"            : "React Native Seed",
+    "footer"                : "Globant",
+    "copyright"             : "Globant",
+    "includeDate"           : true,
+    "navType"               : "vertical",
+    "theme"                 : "sandstone",
+    "linenums"              : true,
+    "collapseSymbols"       : true,
+    "inverseNav"            : false,
+    "outputSourceFiles"     : true,
+    "outputSourcePath"      : false,
+    "dateFormat"            : "dddd, MMMM Do YYYY",
+    "syntaxTheme"           : "default",
+    "sort"					        : false,
+    "search"                : true 
+  }
+}

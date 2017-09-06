@@ -1,0 +1,32 @@
+{
+    "parser": "babel-eslint",
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "ecmaFeatures": {
+        "jsx": true
+    },
+    "plugins": [
+        "react",
+        "react-native"
+    ],
+    "rules": {
+        "quotes": ["error", "single"],
+        "no-underscore-dangle": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react-native/no-unused-styles": 2,
+        "react-native/split-platform-components": 2,
+        "react-native/no-color-literals": 2
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".android.js", ".ios.js"]
+            }
+        }
+    },
+    "globals": {
+        "require": true,
+        "module": true,
+        "Promise": true
+    }
+  }
+  
