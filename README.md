@@ -14,6 +14,7 @@
 
 * [React native install - Use build projects with native code](https://facebook.github.io/react-native/docs/getting-started.html)
 * Run 'react-native run-*'
+* Default user and pass: 'jdoe@gmail.com jdoe1234'
 
 ### Back-end
 
